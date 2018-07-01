@@ -1,17 +1,20 @@
 import Questions from "./questions";
-import { addResolveFunctionsToSchema } from "graphql-tools";
 
+//obj, args, context
 export default {
   Query: {
-    questions() {
-      return Questions.find({}).fetch();
+    questions(obj, args, { userId }) {
+      //give out all resolutsions saved with userId saved as this
+      return Questions.find({
+        userId
+      }).fetch();
     }
   },
   Mutation: {
-    createQuestion(obj, { name }, context) {
-      console.log(name);
+    createQuestion(obj, { name }, { userId }) {
       const questionId = Questions.insert({
-        name
+        name,
+        userId
       });
       return Questions.findOne(questionId);
     }

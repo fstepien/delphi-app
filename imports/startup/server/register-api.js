@@ -4,26 +4,30 @@ import merge from "lodash/merge";
 
 import QuestionsSchema from "../../api/questions/Questions.graphql";
 import QuestionsResolvers from "../../api/questions/resolvers";
+import UsersSchema from "../../api/users/User.graphql";
+import UsersResolvers from "../../api/users/resolvers";
 
-const typeDefs = [
-  `
+// hl
+
+const testSchema = `
 type Query {
-    hi: String
-    questions: [Question]
+  hi: String
+  questions: [Question]
+  user: User
 }
-`,
-  QuestionsSchema
-];
-//new test
-const resolver = {
+`;
+
+const typeDefs = [testSchema, QuestionsSchema, UsersSchema];
+
+const testResolvers = {
   Query: {
     hi() {
-      return "Hello Delphi Users";
+      return "Hello Level Up";
     }
   }
 };
 
-const resolvers = merge(resolver, QuestionsResolvers);
+const resolvers = merge(testResolvers, QuestionsResolvers, UsersResolvers);
 
 const schema = makeExecutableSchema({
   typeDefs,
