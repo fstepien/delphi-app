@@ -1,0 +1,8 @@
+type Question {
+    _id: String!
+    name: String!
+}
+
+type Mutation {
+    createQuestion(name: String!): Question
+}
