@@ -10,7 +10,6 @@ const createQuestion = gql`
   }
 `;
 
-//add clear form in .then() ?
 class QuestionForm extends Component {
   submitForm = () => {
     this.props
@@ -19,7 +18,9 @@ class QuestionForm extends Component {
           name: this.name.value
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
@@ -31,7 +32,7 @@ class QuestionForm extends Component {
     );
   }
 }
-// Questions in refetchQueries is the named query from App.js
+
 export default graphql(createQuestion, {
   name: "createQuestion",
   options: {

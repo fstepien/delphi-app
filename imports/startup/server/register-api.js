@@ -7,7 +7,7 @@ import QuestionsResolvers from "../../api/questions/resolvers";
 import UsersSchema from "../../api/users/User.graphql";
 import UsersResolvers from "../../api/users/resolvers";
 
-// hl
+// hl test
 
 const testSchema = `
 type Query {

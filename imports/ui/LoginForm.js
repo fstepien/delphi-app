@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Accounts } from "meteor/accounts-base";
 
 export default class LoginForm extends Component {
   login = e => {
     e.preventDefault();
     Meteor.loginWithPassword(this.email.value, this.password.value, error => {
+      console.log(error);
       if (!error) {
         this.props.client.resetStore();
       }

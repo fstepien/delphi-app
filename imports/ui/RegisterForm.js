@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accouns } from "meteor/accounts-base";
+import { Accounts } from "meteor/accounts-base";
 
 export default class RegisterForm extends Component {
   registerUser = e => {
@@ -17,6 +17,7 @@ export default class RegisterForm extends Component {
       }
     );
   };
+
   render() {
     return (
       <form onSubmit={this.registerUser}>
