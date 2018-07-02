@@ -3,3 +3,6 @@ type User {
     email: String
 }
 
+extend type Query {
+  user: User
+}

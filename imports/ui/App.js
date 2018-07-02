@@ -35,7 +35,7 @@ const App = ({ loading, questions, client, user }) => {
     </div>
   );
 };
-
+//test
 const appQuery = gql`
   query Questions {
     questions {

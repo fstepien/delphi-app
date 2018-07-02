@@ -9,25 +9,9 @@ import UsersResolvers from "../../api/users/resolvers";
 
 // hl test
 
-const testSchema = `
-type Query {
-  hi: String
-  questions: [Question]
-  user: User
-}
-`;
+const typeDefs = [QuestionsSchema, UsersSchema];
 
-const typeDefs = [testSchema, QuestionsSchema, UsersSchema];
-
-const testResolvers = {
-  Query: {
-    hi() {
-      return "Hello Level Up";
-    }
-  }
-};
-
-const resolvers = merge(testResolvers, QuestionsResolvers, UsersResolvers);
+const resolvers = merge(QuestionsResolvers, UsersResolvers);
 
 const schema = makeExecutableSchema({
   typeDefs,

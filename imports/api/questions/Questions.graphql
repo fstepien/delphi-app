@@ -3,6 +3,10 @@ type Question {
     name: String!
 }
 
+type Query {
+  questions: [Question]
+}
+
 type Mutation {
     createQuestion(name: String!): Question
 }

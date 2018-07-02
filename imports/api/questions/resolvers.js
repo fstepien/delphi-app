@@ -3,7 +3,7 @@ import Questions from "./questions";
 //obj, args, context
 export default {
   Query: {
-    questions(obj, args, { userId }) {
+    questions(obj, args, { userId = null }) {
       return Questions.find({
         userId
       }).fetch();
@@ -12,7 +12,7 @@ export default {
 
   Mutation: {
     createQuestion(obj, { name }, { userId }) {
-      const questionId = Quetsions.insert({
+      const questionId = Questions.insert({
         name,
         userId
       });
