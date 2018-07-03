@@ -1,0 +1,10 @@
+type Idea {
+    _id: String,
+    name: String, 
+    completed: Boolean
+}
+
+extend type Mutation {
+    createIdea(name: String!, questionId: String!): Idea
+    toggleIdea(_id: String!): Idea
+}

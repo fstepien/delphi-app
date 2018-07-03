@@ -1,6 +1,7 @@
 type Question {
     _id: String!
     name: String!
+    ideas: [Idea]
 }
 
 type Query {

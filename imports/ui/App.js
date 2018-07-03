@@ -2,9 +2,11 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import QuestionForm from "./QuestionForm";
+import IdeaForm from "./IdeaForm";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import { withApollo } from "react-apollo";
+import Idea from "./questions/Idea";
 
 const App = ({ loading, questions, client, user }) => {
   if (loading) {
@@ -30,17 +32,30 @@ const App = ({ loading, questions, client, user }) => {
 
       <QuestionForm />
       <ul>
-        {questions.map(question => <li key={question._id}>{question.name}</li>)}
+        {questions.map(question => (
+          <li key={question._id}>
+            {question.name}
+            <ul>
+              {question.ideas.map(idea => <Idea key={idea._id} idea={idea} />)}
+            </ul>
+            <IdeaForm questionId={question._id} />
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
-//test
+//test two
 const appQuery = gql`
   query Questions {
     questions {
       _id
       name
+      ideas {
+        _id
+        name
+        completed
+      }
     }
     user {
       _id

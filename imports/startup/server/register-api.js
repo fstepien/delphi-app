@@ -6,12 +6,14 @@ import QuestionsSchema from "../../api/questions/Questions.graphql";
 import QuestionsResolvers from "../../api/questions/resolvers";
 import UsersSchema from "../../api/users/User.graphql";
 import UsersResolvers from "../../api/users/resolvers";
+import IdeasSchema from "../../api/ideas/Idea.graphql";
+import IdeasResolvers from "../../api/ideas/resolvers";
 
-// hl test
+// test new
 
-const typeDefs = [QuestionsSchema, UsersSchema];
+const typeDefs = [IdeasSchema, QuestionsSchema, UsersSchema];
 
-const resolvers = merge(QuestionsResolvers, UsersResolvers);
+const resolvers = merge(IdeasResolvers, QuestionsResolvers, UsersResolvers);
 
 const schema = makeExecutableSchema({
   typeDefs,
