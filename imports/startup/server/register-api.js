@@ -9,7 +9,7 @@ import UsersResolvers from "../../api/users/resolvers";
 import IdeasSchema from "../../api/ideas/Idea.graphql";
 import IdeasResolvers from "../../api/ideas/resolvers";
 
-// test new
+//  test test test
 
 const typeDefs = [IdeasSchema, QuestionsSchema, UsersSchema];
 

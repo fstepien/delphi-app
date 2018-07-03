@@ -15,15 +15,28 @@ export default {
   Question: {
     ideas: question => {
       return Ideas.find({ questionId: question._id }).fetch();
+    },
+    completed: question => {
+      const ideas = Ideas.find({
+        questionId: question._id
+      }).fetch();
+      if (ideas.length === 0) {
+        return false;
+      }
+      const completedIdeas = ideas.filter(idea => idea.completed);
+      return ideas.length === completedIdeas.length;
     }
   },
   Mutation: {
     createQuestion(obj, { name }, { userId }) {
-      const questionId = Questions.insert({
-        name,
-        userId
-      });
-      return Questions.findOne(questionId);
+      if (userId) {
+        const questionId = Questions.insert({
+          name,
+          userId
+        });
+        return Questions.findOne(questionId);
+      }
+      throw new Error("Unauthorized");
     }
   }
 };

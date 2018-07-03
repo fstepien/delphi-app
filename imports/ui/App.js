@@ -3,10 +3,9 @@ import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import QuestionForm from "./QuestionForm";
 import IdeaForm from "./IdeaForm";
-import RegisterForm from "./RegisterForm";
-import LoginForm from "./LoginForm";
 import { withApollo } from "react-apollo";
 import Idea from "./questions/Idea";
+import UserForm from "./UserForm";
 
 const App = ({ loading, questions, client, user }) => {
   if (loading) {
@@ -14,34 +13,31 @@ const App = ({ loading, questions, client, user }) => {
   }
   return (
     <div>
-      {user._id ? (
-        <button
-          onClick={() => {
-            Meteor.logout();
-            client.resetStore();
-          }}
-        >
-          Logout
-        </button>
-      ) : (
-        <div>
-          <RegisterForm client={client} />
-          <LoginForm client={client} />
-        </div>
+      <UserForm user={user} client={client} />
+      {user._id && (
+        <React.Fragment>
+          <QuestionForm />
+          <ul>
+            {questions.map(question => (
+              <li key={question._id}>
+                <span
+                  style={{
+                    textDecoration: question.completed ? "line-through" : "none"
+                  }}
+                >
+                  {question.name}
+                </span>
+                <ul>
+                  {question.ideas.map(idea => (
+                    <Idea key={idea._id} idea={idea} />
+                  ))}
+                </ul>
+                <IdeaForm questionId={question._id} />
+              </li>
+            ))}
+          </ul>
+        </React.Fragment>
       )}
-
-      <QuestionForm />
-      <ul>
-        {questions.map(question => (
-          <li key={question._id}>
-            {question.name}
-            <ul>
-              {question.ideas.map(idea => <Idea key={idea._id} idea={idea} />)}
-            </ul>
-            <IdeaForm questionId={question._id} />
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
@@ -51,6 +47,7 @@ const appQuery = gql`
     questions {
       _id
       name
+      completed
       ideas {
         _id
         name

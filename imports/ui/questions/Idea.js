@@ -11,14 +11,19 @@ class Idea extends Component {
     });
   };
   render() {
+    const { idea } = this.props;
     return (
       <li>
         <input
           type="checkbox"
           onChange={this.toggleIdea}
-          checked={this.props.idea.completed}
+          checked={idea.completed}
         />
-        {this.props.idea.name}
+        <span
+          style={{ textDecoration: idea.completed ? "line-through" : "none" }}
+        >
+          {idea.name}
+        </span>
       </li>
     );
   }

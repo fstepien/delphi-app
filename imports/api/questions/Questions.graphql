@@ -2,6 +2,7 @@ type Question {
     _id: String!
     name: String!
     ideas: [Idea]
+    completed: Boolean
 }
 
 type Query {
